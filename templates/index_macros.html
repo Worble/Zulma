@@ -1,0 +1,94 @@
+{% macro hero(title) %}
+<section class="hero is-primary is-bold">
+    <header>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">{{title}}</h1>
+            </div>
+        </div>
+    </header>
+</section>
+{% endmacro hero %}
+
+{% macro list_articles(pages) %}
+<section class="articles">
+    <div class="columns is-desktop">
+        <div class="column is-10-desktop is-offset-1-desktop">
+            {% for page in pages %}
+            {{ post_macros::page_in_list(page=page) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endmacro list_articles %}
+
+{% macro paginate(paginator) %}
+<section class="paginator-container">
+    <div class="columns">
+        <div class="column is-10 is-offset-1">
+            <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+                {% if paginator.previous %}
+                <a class="button is-primary pagination-previous" href="{{ paginator.previous }}">&laquo; Previous</a>
+                {% endif %}
+                <ul class="pagination-list">
+                    <li>Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</li>
+                </ul>
+                {% if paginator.next %}
+                <a class="button is-primary pagination-next" href="{{ paginator.next }}">Next &raquo;</a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+</section>
+{% endmacro paginate %}
+
+{% macro navbar() %}
+{% if config.extra.zulma_menu or config.extra.zulma_brand or config.build_search_index %}
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                {% if config.extra.zulma_brand %}
+                <a class="navbar-item" href="/">
+                    {% if config.extra.zulma_brand.image %}
+                    <img src="{{ config.extra.zulma_brand.image | safe | replace(from="$BASE_URL", to=config.base_url) }}"
+                        alt="{{ config.extra.zulma_brand.text }}">
+                    {% else %}
+                    <span>{{ config.extra.zulma_brand.text }}</span>
+                    {% endif %}
+                </a>
+                {% endif %}
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    {% if config.extra.zulma_menu %}
+                    {% for item in config.extra.zulma_menu %}
+                    <a itemprop="url"
+                        class="navbar-item {% if item.url | replace(from="$BASE_URL", to=config.base_url) == current_url %}is-active{% endif %}"
+                        href="{{ item.url | safe | replace(from="$BASE_URL", to=config.base_url) }}">
+                        <span itemprop="name">{{ item.name }}
+                        </span>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                    {% if config.build_search_index %}
+                    <div class="navbar-item search-container js-only">
+                        <input class="input is-primary" id="search" type="search" placeholder="Search">
+
+                        <div class="search-results box">
+                            <div class="search-results__items"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endif %}
+{% endmacro navbar %}

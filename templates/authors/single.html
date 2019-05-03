@@ -1,0 +1,6 @@
+{% extends "taxonomy_single.html" %}
+
+{% block content %}
+{% set title = "Author: " ~ term.name %}
+{{ super() }}
+{% endblock content %}

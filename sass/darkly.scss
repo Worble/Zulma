@@ -1,0 +1,13 @@
+@import './_vendor/darkly/variables';
+@import './_vendor/bulma-0.7.4/_bulma.sass';
+@import './_vendor/darkly/overrides';
+
+@import './blog';
+
+.box {
+    $card-border-color: lighten($grey-darker, 5);
+    box-shadow: none;
+    border: $border-width solid $card-border-color;
+    background-color: $grey-darker;
+    border-radius: $radius;
+}

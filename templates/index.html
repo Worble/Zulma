@@ -1,0 +1,85 @@
+{% import "post_macros.html" as post_macros %}
+{% import "index_macros.html" as index_macros %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+
+    {% if config.extra.zulma_theme %}
+    <link rel="preload" as="style" href="{{ get_url(path=config.extra.zulma_theme ~ ".css", trailing_slash=false) }}" />
+    {% else %}
+    <link rel="preload" as="style" href="{{ get_url(path="default.css", trailing_slash=false) }}" />
+    {% endif %}
+
+    {% if config.generate_rss %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml") | safe }}">
+    {% endif %}
+
+    {% block css %}
+    {% if config.extra.zulma_theme %}
+    <link rel="stylesheet" href="{{ get_url(path=config.extra.zulma_theme ~ ".css", trailing_slash=false) }}" />
+    {% else %}
+    <link rel="stylesheet" href="{{ get_url(path="default.css", trailing_slash=false) }}" />
+    {% endif %}
+    {% endblock css %}
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+
+    <noscript>
+        <style>
+            .navbar-menu {
+                display: block;
+            }
+
+            .js-only {
+                display: none;
+            }
+        </style>
+    </noscript>
+</head>
+
+<body>
+    {% block content %}
+    <!-- START NAV -->
+    {% block header %}
+    {{ index_macros::navbar() }}
+    {% endblock header %}
+    <!-- END NAV -->
+    <main class="index">
+        <!-- START HERO TITLE -->
+        {% if config.extra.zulma_title %}
+        {{ index_macros::hero(title=config.extra.zulma_title) }}
+        {% endif %}
+        <!-- END HERO TITLE -->
+        <div class="container">
+            <!-- START ARTICLE FEED -->
+            {% if paginator %}
+            {{ index_macros::list_articles(pages=paginator.pages) }}
+            {% else %}
+            {{ index_macros::list_articles(pages=section.pages) }}
+            {% endif %}
+            <!-- END ARTICLE FEED -->
+            <!-- START PAGINATION -->
+            {% if paginator %}
+            {{ index_macros::paginate(paginator=paginator) }}
+            {% endif %}
+            <!-- END PAGINATION -->
+        </div>
+    </main>
+    {% endblock content %}
+    <script async type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
+    <script async type="text/javascript" src="{{ get_url(path="search_index.en.js") }}"></script>
+    <script async type="text/javascript" src="{{ get_url(path="js/bulma.js") }}"></script>
+    <script async type="text/javascript" src="{{ get_url(path="js/search.js") }}"></script>
+</body>
+
+</html>

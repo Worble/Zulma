@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% import "index_macros.html" as index_macros %}
+{% import "taxonomy_macros.html" as taxonomy_macros %}
+
+{% block content %}
+<!-- START NAV -->
+{% block header %}
+{{ super() }}
+{% endblock header %}
+<!-- END NAV -->
+<main>
+    <!-- START HERO TITLE -->
+    {{ index_macros::hero(title=title) }}
+    <!-- END HERO TITLE -->
+    <!-- START TAXONOMY LIST -->
+    {{ taxonomy_macros::list(terms=terms) }}
+    <!-- END TAXONOMY LIST -->
+</main>
+{% endblock content %}

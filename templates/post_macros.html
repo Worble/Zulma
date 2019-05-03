@@ -1,0 +1,126 @@
+{% macro read_time(page) %}
+<svg class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round"
+    stroke-linejoin="round" stroke-width="6.25%">
+    <circle cx="16" cy="16" r="14" />
+    <path d="M16 8 L16 16 20 20" />
+</svg>
+<span>&nbsp;{{ page.reading_time }} minute read</span>
+{% endmacro read_time %}
+
+{% macro article_header(page) %}
+<header>
+    <div class="has-text-centered">
+        <a href="{{ page.permalink | safe }}">
+            <p class="title article-title">{{ page.title }}</p>
+        </a>
+        <div class="tags has-addons level-item">
+            {% if page.extra.author %}
+            <span class="tag is-rounded is-info">{{ page.extra.author }}</span>
+            {% endif %}
+            <span class="tag is-rounded">{{ page.date | date(format="%F") }}</span>
+            <span class="tag is-rounded">{{ self::read_time(page=page) }}</span>
+        </div>
+    </div>
+</header>
+{% endmacro article_header %}
+
+{% macro page_in_list(page) %}
+<article itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="card article">
+        <div class="card-content">
+            {{ self::article_header(page = page) }}
+            {% if page.summary %}
+            <div itemprop="summary" class="content article-body">
+                {{ page.summary | safe }}
+                <nav class="readmore">
+                    <a itemprop="url" href="{{ page.permalink | safe }}">Read More&nbsp;&raquo;
+                    </a>
+                </nav>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</article>
+{% endmacro page_in_list %}
+
+{% macro post_footer(page) %}
+<footer class="card-footer article-footer">
+    <div class="columns is-multiline">
+        <div class="column is-12">
+            <p>
+                Published
+                {{self::post_footer_date(page=page)}}
+                {{self::post_footer_authors(page=page)}}
+                {{self::post_footer_categories(page=page)}}
+                {{self::post_footer_tags(page=page)}}
+            </p>
+        </div>
+        <div class="column">
+            <a class="button is-pulled-right is-info" href="/">Back Home</a>
+        </div>
+    </div>
+</footer>
+{% endmacro post_footer %}
+
+
+{% macro post_footer_date(page) %}
+{% if page.date %}
+<time datetime="{{ page.date | date(format="%F") }}">
+    {{ page.date | date(format="%F") }}
+</time>
+{% endif %}
+{% endmacro post_footer_date %}
+
+
+{% macro post_footer_authors(page) %}
+{% if page.taxonomies.authors %}
+by
+{% for author in page.taxonomies.authors %}
+<a href="{{ get_taxonomy_url(kind="authors", name=author) | safe }}">
+    <span class="tag is-success">{{ author }} </span>
+</a>
+{% if page.taxonomies.authors | length > 1 %}
+{% if loop.index != page.taxonomies.authors | length %}
+{% if loop.index == page.taxonomies.authors | length - 1 %}
+and
+{% else %}
+,
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endmacro post_footer_authors %}
+
+
+{% macro post_footer_categories(page) %}
+{% if page.taxonomies.categories %}
+{% set category = page.taxonomies.categories[0] %}
+in <a href="{{ get_taxonomy_url(kind="categories", name=category) | safe }}">
+    <span class="tag is-primary">
+        {{ category }}
+    </span>
+</a>
+{% endif %}
+{% endmacro post_footer_date %}
+
+
+{% macro post_footer_tags(page) %}
+{% if page.taxonomies.tags %}
+and tagged
+{% for tag in page.taxonomies.tags %}
+<a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">
+    <span class="tag is-link">{{ tag }} </span>
+</a>
+{% if page.taxonomies.tags | length > 1 %}
+{% if loop.index != page.taxonomies.tags | length %}
+{% if loop.index == page.taxonomies.tags | length - 1 %}
+and
+{% else %}
+,
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endmacro post_footer_tags %}
