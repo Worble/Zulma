@@ -19,7 +19,7 @@ First download this theme to your `themes` directory:
 
 ```bash
 $ cd themes
-$ git clone {GITHUB_LINK}
+$ git clone https://github.com/Worble/Zulma
 ```
 and then enable it in your `config.toml`:
 
