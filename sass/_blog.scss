@@ -126,3 +126,6 @@ body {
     height: 100%;
 }
 
+input#search::placeholder{
+    color: $grey-darker;
+}

@@ -11,7 +11,8 @@
 <header>
     <div class="has-text-centered">
         <a href="{{ page.permalink | safe }}">
-            <p class="title article-title">{{ page.title }}</p>
+            <p class="title article-title">{{ page.title }}
+            </p>
         </a>
         <div class="tags has-addons level-item">
             {% if page.extra.author %}
@@ -33,7 +34,8 @@
             <div itemprop="summary" class="content article-body">
                 {{ page.summary | safe }}
                 <nav class="readmore">
-                    <a itemprop="url" href="{{ page.permalink | safe }}">Read More&nbsp;&raquo;
+                    <a itemprop="url" href="{{ page.permalink | safe }}">Read
+                        More&nbsp;&raquo;
                     </a>
                 </nav>
             </div>
