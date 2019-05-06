@@ -42,13 +42,15 @@ body {
 }
 
 .article-subtitle {
-    //color: #909AA0;
     margin-bottom: 3rem;
 }
 
 .article-footer,
 .article-body {
-    margin: 2rem 6rem;
+    margin: 2rem 0;
+    @include desktop {
+        margin: 2rem 6rem;
+    }
 }
 
 .article-body {
@@ -83,6 +85,8 @@ body {
 
 .search-results {
     display: none;
+    max-height: 35rem;
+    overflow: auto;
 
     @include desktop {
         position: absolute;
