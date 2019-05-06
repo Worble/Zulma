@@ -99,8 +99,8 @@
 <footer class="footer js-only">
     <div class="columns">
         <div class="column">
-            <div class="content">
-                <div class="is-pulled-right">
+            <div class="content is-flex">
+                <div class="theme-select-container">
                     Theme:
                     <select id="theme-select">
                         {% for theme in config.extra.zulma_themes %}
@@ -136,7 +136,7 @@
 <link id="{{theme}}" class="stylesheet" rel="stylesheet"
     href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
 {% else %}
-<link id="{{theme}}" class="alternate stylesheet" disabled rel="stylesheet"
+<link id="{{theme}}" class="alternate stylesheet" media="none" rel="stylesheet"
     href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
 {% endif %}
 {% endfor %}

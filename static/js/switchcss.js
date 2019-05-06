@@ -16,6 +16,7 @@ function changeTheme(themeName) {
     document.querySelectorAll('link.stylesheet').forEach(element => {
         if (element.id === themeName) {
             element.disabled = false;
+            element.media = '';
         }
         else {
             alternates.push(element);
@@ -24,6 +25,7 @@ function changeTheme(themeName) {
 
     alternates.forEach(element => {
         element.disabled = true;
+        element.media = 'none';
     });
 
     saveTheme(themeName);

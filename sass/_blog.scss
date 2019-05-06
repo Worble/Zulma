@@ -119,3 +119,11 @@ input#search::placeholder{
     margin-top: 4rem;
     padding: 2rem;
 }
+
+.pagination-previous, .pagination-next {
+    flex-grow: 0;
+}
+
+.theme-select-container{
+    margin-left:auto;
+}
