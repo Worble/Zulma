@@ -12,6 +12,7 @@
     - [Brand](#brand)
     - [Search](#search)
     - [Title](#title)
+    - [Theming](#theming)
   - [Original](#original)
 
 ## Installation
@@ -149,14 +150,14 @@ In extra, setting `zulma_theme` to a valid value will change the current colour 
 - pulse
 - simplex
 
-All valid themes can also be found under the `extras.zulma_themes` variable in the `config.toml`. Choosing no theme will set default as the theme. Setting an invalid theme value will cause the site to render improperly.
+All valid themes can also be found under the `extra.zulma_themes` variable in the `theme.toml`. Choosing no theme will set default as the theme. Setting an invalid theme value will cause the site to render improperly.
 
 ```toml
 [extra]
 zulma_theme = "darkly"
 ```
 
-Additionally, in extra, you can also set the `zulma_allow_theme_selection` boolean. Setting this to true will allow a menu in the footer to allow users to select their own theme. This requires javascript to be enabled to function; if the page detects javascript is disabled on the clients machine, it will hide itself.
+Additionally, in extra, you can also set the `zulma_allow_theme_selection` boolean. Setting this to `true` will allow a menu in the footer to allow users to select their own theme. This option will store their theme choice in their localstorage and apply it on every page, assuming `zulma_allow_theme_selection` is still true. This requires javascript to be enabled to function; if the page detects javascript is disabled on the clients machine, it will hide itself.
 
 ```toml
 [extra]

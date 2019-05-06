@@ -136,7 +136,7 @@
 <link id="{{theme}}" class="stylesheet" rel="stylesheet"
     href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
 {% else %}
-<link id="{{theme}}" class="stylesheet" media="none" rel="stylesheet"
+<link id="{{theme}}" class="alternate stylesheet" disabled rel="stylesheet"
     href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
 {% endif %}
 {% endfor %}
