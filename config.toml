@@ -3,3 +3,12 @@ base_url = "https://example.com"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
+
+build_search_index = true
+
+[extra]
+zulma_title = "Blog"
+zulma_brand = { image = "$BASE_URL/images/bulma.png", text = "Home" }
+zulma_theme = "darkly"
+zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex"]
+zulma_allow_theme_selection = true

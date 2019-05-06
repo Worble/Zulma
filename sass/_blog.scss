@@ -2,11 +2,6 @@ html,
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-    //background: #F0F2F4;
-}
-
-.navbar.is-white {
-    //background: #F0F2F4;
 }
 
 .navbar-brand .brand-text {
@@ -24,17 +19,6 @@ body {
         line-height: 1.9;
         margin: 15px 0;
     }
-}
-
-.author-image {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    width: 60px;
-    height: 60px;
-    margin-left: -30px;
-    //border: 3px solid #ccc;
-    border-radius: 50%;
 }
 
 .media-center {
@@ -74,10 +58,7 @@ body {
 .article-footer {
     font-style: italic;
     padding: 1.5rem;
-
-    .columns {
-        width: 100%;
-    }
+    width:100%;
 
     .button,
     .tag {
@@ -128,4 +109,9 @@ body {
 
 input#search::placeholder{
     color: $grey-darker;
+}
+
+.footer{
+    margin-top: 4rem;
+    padding: 2rem;
 }

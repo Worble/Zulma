@@ -5,6 +5,7 @@
 <html>
 
 <head>
+    {% block head %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -15,28 +16,27 @@
         {% block title %}{{ config.title }}{% endblock title %}
     </title>
 
-    {% if config.extra.zulma_theme %}
-    <link rel="preload" as="style" href="{{ get_url(path=config.extra.zulma_theme ~ ".css", trailing_slash=false) }}" />
-    {% else %}
-    <link rel="preload" as="style" href="{{ get_url(path="default.css", trailing_slash=false) }}" />
-    {% endif %}
+    {% for theme in config.extra.zulma_themes %}
+    <link rel="preload" as="style" href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
+    {% endfor %}
+
+    {% block css %}
+    {{ index_macros::css() }}
+    {% endblock css %}
 
     {% if config.generate_rss %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml") | safe }}">
     {% endif %}
 
-    {% block css %}
-    {% if config.extra.zulma_theme %}
-    <link rel="stylesheet" href="{{ get_url(path=config.extra.zulma_theme ~ ".css", trailing_slash=false) }}" />
-    {% else %}
-    <link rel="stylesheet" href="{{ get_url(path="default.css", trailing_slash=false) }}" />
-    {% endif %}
-    {% endblock css %}
-
+    {% block js %}
     {% if config.build_search_index %}
     <script defer type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
     <script defer type="text/javascript" src="{{ get_url(path="search_index.en.js") }}"></script>
-    {% endif }
+    {% if config.extra.zulma_allow_theme_selection %}
+    <script type="text/javascript" src="{{ get_url(path="js/switchcss.js") }}"></script>
+    {% endif %}
+    {% endif %}
+    {% endblock js %}
 
     {% block extra_head %}
     {% endblock extra_head %}
@@ -52,6 +52,7 @@
             }
         </style>
     </noscript>
+    {% endblock head %}
 </head>
 
 <body>
@@ -83,6 +84,8 @@
         </div>
     </main>
     {% endblock content %}
+
+    {{ index_macros::footer() }}
 
     <script type="text/javascript" src="{{ get_url(path="js/bulma.js") }}"></script>
 

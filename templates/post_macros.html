@@ -46,19 +46,21 @@
 {% endmacro page_in_list %}
 
 {% macro post_footer(page) %}
-<footer class="card-footer article-footer">
-    <div class="columns is-multiline">
-        <div class="column is-12">
-            <p>
-                Published
-                {{self::post_footer_date(page=page)}}
-                {{self::post_footer_authors(page=page)}}
-                {{self::post_footer_categories(page=page)}}
-                {{self::post_footer_tags(page=page)}}
-            </p>
-        </div>
-        <div class="column">
-            <a class="button is-pulled-right is-info" href="/">Back Home</a>
+<footer class="card-footer">
+    <div class="article-footer">
+        <div class="columns is-multiline">
+            <div class="column is-12">
+                <p>
+                    Published
+                    {{self::post_footer_date(page=page)}}
+                    {{self::post_footer_authors(page=page)}}
+                    {{self::post_footer_categories(page=page)}}
+                    {{self::post_footer_tags(page=page)}}
+                </p>
+            </div>
+            <div class="column">
+                <a class="button is-pulled-right is-info" href="/">Back Home</a>
+            </div>
         </div>
     </div>
 </footer>
