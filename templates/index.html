@@ -16,10 +16,6 @@
         {% block title %}{{ config.title }}{% endblock title %}
     </title>
 
-    {% for theme in config.extra.zulma_themes %}
-    <link rel="preload" as="style" href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
-    {% endfor %}
-
     {% block css %}
     {{ index_macros::css() }}
     {% endblock css %}

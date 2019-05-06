@@ -2,3 +2,6 @@ name = "Zulma"
 description = "A zola theme based off bulma.css"
 license = "MIT"
 min_version = "0.6.0"
+
+[extra]
+zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex"]
