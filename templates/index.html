@@ -78,10 +78,9 @@
             {% endif %}
             <!-- END PAGINATION -->
         </div>
+        {{ index_macros::footer() }}
     </main>
     {% endblock content %}
-
-    {{ index_macros::footer() }}
 
     <script type="text/javascript" src="{{ get_url(path="js/bulma.js") }}"></script>
 
