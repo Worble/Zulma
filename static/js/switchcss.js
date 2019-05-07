@@ -2,6 +2,7 @@
     //Constants
     const THEME_KEY = "ZULMA_THEME";
     const STOP_LINK_CSS_ID = "stop-blink";
+    const STYLESHEET_CLASSNAME = "stylesheet"
 
     //Variables
     let link = null;
@@ -24,23 +25,25 @@
 
         //if this is the first load of the page, remove the current stylesheet early to avoid flash of wrongly styled content
         if (firstLoad) {
-            document.querySelectorAll('.stylesheet').forEach((el) => {
-                el.remove();
-            });
+            removeStylesheets();
         }
 
         saveTheme(themeName);
     };
 
+    function removeStylesheets() {
+        document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`).forEach((el) => {
+            el.remove();
+        });
+    }
+
     /* The function called when the css has finished loading */
     function onLinkLoad() {
         link.removeEventListener('load', onLinkLoad);
         //remove the previous stylesheet(s)
-        document.querySelectorAll('.stylesheet').forEach((el) => {
-            el.remove();
-        });
+        removeStylesheets();
         //add stylesheet class
-        link.className += 'stylesheet';
+        link.className += STYLESHEET_CLASSNAME;
         //make body visible again if it was hidden
         showBody();
     };
@@ -50,7 +53,7 @@
         localStorage.setItem(THEME_KEY, themeName);
     };
 
-    /* Adds the given css to the head. */
+    /* Hides the body of the page */
     function hideBody() {
         var head = document.getElementsByTagName('head')[0];
         var style = document.createElement('style');
@@ -66,6 +69,7 @@
         head.appendChild(style);
     };
 
+    /* Shows the body of the page */
     function showBody() {
         let css = document.getElementById(STOP_LINK_CSS_ID);
         if (css)
