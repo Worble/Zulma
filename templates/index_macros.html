@@ -29,12 +29,16 @@
             <nav class="pagination is-centered" role="navigation" aria-label="pagination">
                 {% if paginator.previous %}
                 <a class="button is-primary pagination-previous" href="{{ paginator.previous }}">&laquo; Previous</a>
+                {% else %}
+                <a class="button is-primary pagination-previous" disabled title="This is the first page">&laquo; Previous</a>
                 {% endif %}
                 <ul class="pagination-list">
                     <li>Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</li>
                 </ul>
                 {% if paginator.next %}
                 <a class="button is-primary pagination-next" href="{{ paginator.next }}">Next &raquo;</a>
+                {% else %}
+                <a class="button is-primary pagination-next" disabled title="This is the last page">Next &raquo;</a>
                 {% endif %}
             </nav>
         </div>
