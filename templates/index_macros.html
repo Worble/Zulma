@@ -125,24 +125,10 @@
 {% endmacro footer %}
 
 {% macro css() %}
-{% if config.extra.zulma_allow_theme_selection %}
-{% for theme in config.extra.zulma_themes %}
 {% if config.extra.zulma_theme %}
-{% set default_theme = config.extra.zulma_theme %}
+<link id="{{config.extra.zulma_theme}}" class="stylesheet" rel="stylesheet"
+    href="{{ get_url(path=config.extra.zulma_theme ~ ".css", trailing_slash=false) }}" />
 {% else %}
-{% set default_theme = "default" %}
-{% endif %}
-{% if default_theme == theme %}
-<link id="{{theme}}" class="stylesheet" rel="stylesheet"
-    href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
-{% else %}
-<link id="{{theme}}" class="alternate stylesheet" media="none" rel="stylesheet"
-    href="{{ get_url(path=theme ~ ".css", trailing_slash=false) }}" />
-{% endif %}
-{% endfor %}
-{% elif config.extra.zulma_theme %}
-<link rel="stylesheet" href="{{ get_url(path=config.extra.zulma_theme ~ ".css", trailing_slash=false) }}" />
-{% else %}
-<link rel="stylesheet" href="{{ get_url(path="default.css", trailing_slash=false) }}" />
+<link id="default" class="stylesheet" rel="stylesheet" href="{{ get_url(path="default.css", trailing_slash=false) }}" />
 {% endif %}
 {% endmacro css %}

@@ -16,23 +16,20 @@
         {% block title %}{{ config.title }}{% endblock title %}
     </title>
 
-    {% block css %}
-    {{ index_macros::css() }}
-    {% endblock css %}
 
+
+    {{ index_macros::css() }}
+    {% if config.extra.zulma_allow_theme_selection %}
+    <script type="text/javascript" src="{{ get_url(path="js/switchcss.js") }}"></script>
+    {% endif %}
     {% if config.generate_rss %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml") | safe }}">
     {% endif %}
 
-    {% block js %}
     {% if config.build_search_index %}
     <script defer type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
     <script defer type="text/javascript" src="{{ get_url(path="search_index.en.js") }}"></script>
     {% endif %}
-    {% if config.extra.zulma_allow_theme_selection %}
-    <script type="text/javascript" src="{{ get_url(path="js/switchcss.js") }}"></script>
-    {% endif %}
-    {% endblock js %}
 
     {% block extra_head %}
     {% endblock extra_head %}
@@ -79,9 +76,11 @@
             {% endif %}
             <!-- END PAGINATION -->
         </div>
-        {{ index_macros::footer() }}
     </main>
     {% endblock content %}
+    {% block footer %}
+    {{ index_macros::footer() }}
+    {% endblock footer %}
 
     <script type="text/javascript" src="{{ get_url(path="js/bulma.js") }}"></script>
 

@@ -7,23 +7,25 @@
 {{ super() }}
 {% endblock header %}
 <!-- END NAV -->
-<section class="container">
-    <div class="columns is-desktop">
-        <div class="column is-10-desktop is-offset-1-desktop">
-            <article itemscope itemtype="http://schema.org/BlogPosting">
-                <div class="card article">
-                    <div class="card-content">
-                        {{ post_macros::article_header(page = page) }}
-                        <div itemprop="articleBody" class="content article-body">
-                            {{ page.content | safe }}
+<main>
+    <section class="container">
+        <div class="columns is-desktop">
+            <div class="column is-10-desktop is-offset-1-desktop">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <div class="card article">
+                        <div class="card-content">
+                            {{ post_macros::article_header(page = page) }}
+                            <div itemprop="articleBody" class="content article-body">
+                                {{ page.content | safe }}
+                            </div>
                         </div>
+                        {% block page_footer %}
+                        {{ post_macros::post_footer(page=page) }}
+                        {% endblock page_footer %}
                     </div>
-                    {% block page_footer %}
-                    {{ post_macros::post_footer(page=page) }}
-                    {% endblock page_footer %}
-                </div>
-            </article>
+                </article>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</main>
 {% endblock content %}
