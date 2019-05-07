@@ -8,14 +8,21 @@
     let theme = localStorage.getItem(THEME_KEY);
 
     //Private Methods
+    /* Called when the theme is changed */
     function changeTheme(themeName, firstLoad) {
+        //create the css link element
         var fileref = document.createElement("link");
         fileref.rel = "stylesheet";
         fileref.type = "text/css";
         fileref.href = `/${themeName}.css`;
+
+        //append it to the head
         link = document.getElementsByTagName("head")[0].appendChild(fileref);
 
+        //when it's loaded, call onLinkLoad
         link.addEventListener('load', onLinkLoad);
+
+        //if this is the first load of the page, remove the current stylesheet early to avoid flash of wrongly styled content
         if (firstLoad) {
             document.querySelectorAll('.stylesheet').forEach((el) => {
                 el.remove();
@@ -25,42 +32,55 @@
         saveTheme(themeName);
     };
 
+    /* The function called when the css has finished loading */
     function onLinkLoad() {
         link.removeEventListener('load', onLinkLoad);
+        //remove the previous stylesheet(s)
         document.querySelectorAll('.stylesheet').forEach((el) => {
             el.remove();
         });
+        //add stylesheet class
         link.className += 'stylesheet';
-        addcss('body{visibility:visible;}');
+        //make body visible again if it was hidden
+        showBody();
     };
 
+    /* Saves the current theme in localstorage */
     function saveTheme(themeName) {
         localStorage.setItem(THEME_KEY, themeName);
     };
 
-    function addcss(css) {
-        let el = document.getElementById(STOP_LINK_CSS_ID);
-        if (el) {
-            el.innerText = css;
+    /* Adds the given css to the head. */
+    function hideBody() {
+        var head = document.getElementsByTagName('head')[0];
+        var style = document.createElement('style');
+
+        style.id = STOP_LINK_CSS_ID;
+        style.setAttribute('type', 'text/css');
+
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
         } else {
-            var head = document.getElementsByTagName('head')[0];
-            var style = document.createElement('style');
-            style.id = STOP_LINK_CSS_ID;
-            style.setAttribute('type', 'text/css');
-            if (style.styleSheet) { // IE
-                style.styleSheet.cssText = css;
-            } else { // the world
-                style.appendChild(document.createTextNode(css));
-            }
-            head.insertBefore(style, head.firstChild);
+            style.appendChild(document.createTextNode('body{visibility:hidden;}'));
         }
+        head.appendChild(style);
+    };
+
+    function showBody() {
+        let css = document.getElementById(STOP_LINK_CSS_ID);
+        if (css)
+            css.remove();
     };
 
     //Public Methods
     switch_css.init = function () {
+        //if user has selected and theme and it is not the current theme
         if (theme && !document.getElementById(theme)) {
-            addcss('body{visibility:hidden;}')
+            //hide the body to stop FOUC
+            hideBody();
+            //change the theme
             changeTheme(theme, true);
+            //when the DOM is loaded, change the select to their current choice
             window.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('#theme-select>option').forEach(element => {
                     if (element.value === theme) {
@@ -69,6 +89,7 @@
                 });
             });
         }
+        //when the DOM is loaded, set the dropdown to trigger the theme change
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('theme-select').onchange = function () {
                 changeTheme(this.value);
