@@ -14,7 +14,7 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            use: ['babel-loader']
+            use: ["babel-loader", "eslint-loader"]
         }]
     },
     resolve: {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 function debounce(func, wait) {
   var timeout;
 

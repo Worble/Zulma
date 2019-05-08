@@ -35,7 +35,7 @@
         }
 
         saveTheme(themeName);
-    };
+    }
 
     /* Removes all current stylesheets on the page */
     function removeStylesheets() {
@@ -57,7 +57,7 @@
         previousLink = null;
         //make body visible again if it was hidden
         showBody();
-    };
+    }
 
     function onLinkError() {
         //remove event listeners
@@ -77,22 +77,23 @@
         setThemeSelect(document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`)[0].id)
         //make body visible again if it was hidden
         showBody();
-    };
+    }
 
     /* Saves the current theme in localstorage */
     function saveTheme(themeName) {
         localStorage.setItem(THEME_KEY, themeName);
-    };
+    }
 
     /* Clears the current theme in localstorage */
     function clearTheme() {
         localStorage.removeItem(THEME_KEY);
-    };
+    }
 
     /* Hides the body of the page */
     function hideBody() {
-        var head = document.getElementsByTagName('head')[0];
-        var style = document.createElement('style');
+        let head = document.getElementsByTagName('head')[0];
+        let style = document.createElement('style');
+        let css = 'body{visibility:hidden;}';
 
         style.id = STOP_BLINK_CSS_ID;
         style.setAttribute('type', 'text/css');
@@ -100,17 +101,17 @@
         if (style.styleSheet) {
             style.styleSheet.cssText = css;
         } else {
-            style.appendChild(document.createTextNode('body{visibility:hidden;}'));
+            style.appendChild(document.createTextNode(css));
         }
         head.appendChild(style);
-    };
+    }
 
     /* Shows the body of the page */
     function showBody() {
         let css = document.getElementById(STOP_BLINK_CSS_ID);
         if (css)
             css.remove();
-    };
+    }
 
     /* Sets the theme selection to the given theme */
     function setThemeSelect(theme) {
@@ -167,6 +168,6 @@
             }
         });
     }
-}(switch_css = window.switch_css || {}));
+}(switch_css = window.switch_css || {})); // eslint-disable-line
 
-switch_css.init();
+switch_css.init(); // eslint-disable-line
