@@ -19,7 +19,7 @@
     {{ index_macros::css() }}
     <!-- This script must follow css -->
     {% if config.extra.zulma_allow_theme_selection %}
-    <script type="text/javascript" src="{{ get_url(path="js/switchcss.js") }}"></script>
+    <script type="text/javascript" src="{{ get_url(path="js/zulma_switchcss.js") }}"></script>
     {% endif %}
 
     {% if config.generate_rss %}
@@ -82,10 +82,10 @@
     {{ index_macros::footer() }}
     {% endblock footer %}
 
-    <script type="text/javascript" src="{{ get_url(path="js/bulma.js") }}"></script>
+    <script type="text/javascript" src="{{ get_url(path="js/zulma_navbar.js") }}"></script>
 
     {% if config.build_search_index %}
-    <script type="text/javascript" src="{{ get_url(path="js/search.js") }}"></script>
+    <script type="text/javascript" src="{{ get_url(path="js/zulma_search.js") }}"></script>
     {% endif %}
 
     {% endblock body%}

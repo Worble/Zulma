@@ -1,7 +1,7 @@
 (function (switch_css) {
     //Constants
     const THEME_KEY = "ZULMA_THEME";
-    const STOP_LINK_CSS_ID = "stop-blink";
+    const STOP_BLINK_CSS_ID = "stop-blink";
     const STYLESHEET_CLASSNAME = "stylesheet"
 
     //Variables
@@ -58,7 +58,7 @@
         var head = document.getElementsByTagName('head')[0];
         var style = document.createElement('style');
 
-        style.id = STOP_LINK_CSS_ID;
+        style.id = STOP_BLINK_CSS_ID;
         style.setAttribute('type', 'text/css');
 
         if (style.styleSheet) {
@@ -71,7 +71,7 @@
 
     /* Shows the body of the page */
     function showBody() {
-        let css = document.getElementById(STOP_LINK_CSS_ID);
+        let css = document.getElementById(STOP_BLINK_CSS_ID);
         if (css)
             css.remove();
     };
