@@ -39,9 +39,9 @@ That's it! No more configuration should be required, however head to the [Option
 ### Sources
 All the source javascript files live in `javascript/src`. This is a list of the javascript files, their purpose, and their sources. All files are prefixed with `zulma_` to avoid any name clashes.
 
-- `zulma_search.js` - Used when a user types into the search box on the navbar (if enabled). The search is shamefully stolen from [Zola's site](https://github.com/getzola/zola/blob/6100a43/docs/static/search.js). Thanks, Vincent!
+- `zulma_search.js` - Used when a user types into the search box on the navbar (if enabled). Taken from [Zola's site](https://github.com/getzola/zola/blob/6100a43/docs/static/search.js).
 - `zulma_navbar.js` - Used for the mobile navbar toggle. Taken from the [bulma template](https://github.com/dansup/bulma-templates/blob/6263eb7/js/bulma.js) at Bulmaswatch
-- `zulma_switchcss.js` - Used for swapping themes. Created by me.
+- `zulma_switchcss.js` - Used for swapping themes (if enabled). Created by me.
 
 ### Building
  These are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/) installed.):
@@ -181,13 +181,15 @@ zulma_theme = "darkly"
 
 Additionally, in extra, you can also set the `zulma_allow_theme_selection` boolean. Setting this to `true` will allow a menu in the footer to allow users to select their own theme. This option will store their theme choice in their localstorage and apply it on every page, assuming `zulma_allow_theme_selection` is still true. This requires javascript to be enabled to function; if the page detects javascript is disabled on the clients machine, it will hide itself.
 
+Each theme contains the entirety of Bulma, and will weigh in at ~180kb. If you're running on a server severely limited on space, then I'd recommend you delete each theme you're not using, either from the source or from `/public`. Obviously, doing this will cause `zulma_allow_theme_selection` to work improperly, so make sure you either override `extra.zulma_themes` in `config.toml` to only show themes you have left or to not enable this option at all.
+
 ```toml
 [extra]
 zulma_allow_theme_selection = true
 ```
 
 ## Original
-This template is based on the [blog template](https://dansup.github.io/bulma-templates/templates/blog.html) over at [Free Bulma Templates](https://dansup.github.io/bulma-templates/). All themes were taken from [Bulmaswatch](https://jenil.github.io/bulmaswatch/). The code behind from adapted from the [after-dark](https://github.com/getzola/after-dark/blob/master/README.md) zola template.
+This template is based on the [blog template](https://dansup.github.io/bulma-templates/templates/blog.html) over at [Free Bulma Templates](https://dansup.github.io/bulma-templates/). All themes were taken from [Bulmaswatch](https://jenil.github.io/bulmaswatch/). The code behind from originally adapted from the [after-dark](https://github.com/getzola/after-dark/blob/master/README.md) zola template.
 
 ## Known Bugs
-If user theme swapping is enabled and the user selects a theme different to the default, a slight delay will be introduced in page rendering as the css gets swapped out and in by the javascript. This is better than the alternative FOUC or flashes of the old theme, but still annoying. I don't know any way around this, but with browser caching it should be fast enough to not cause serious issues.
+- If user theme swapping is enabled and the user selects a theme different to the default, a slight delay will be introduced in page rendering as the css gets swapped out and in by the javascript. This is better than the alternative FOUC or flashes of the old theme, but still annoying. I don't know any way around this, but with browser caching it should be fast enough to not cause serious issues.
