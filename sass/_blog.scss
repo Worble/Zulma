@@ -2,6 +2,13 @@ html,
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 .navbar-brand .brand-text {
@@ -48,6 +55,7 @@ body {
 .article-footer,
 .article-body {
     margin: 2rem 0;
+
     @include desktop {
         margin: 2rem 6rem;
     }
@@ -60,7 +68,7 @@ body {
 .article-footer {
     font-style: italic;
     padding: 1.5rem;
-    width:100%;
+    width: 100%;
 
     .button,
     .tag {
@@ -111,19 +119,20 @@ body {
     height: 100%;
 }
 
-input#search::placeholder{
+input#search::placeholder {
     color: $grey-darker;
 }
 
-.footer{
+.footer {
     margin-top: 4rem;
     padding: 2rem;
 }
 
-.pagination-previous, .pagination-next {
+.pagination-previous,
+.pagination-next {
     flex-grow: 0;
 }
 
-.theme-select-container{
-    margin-left:auto;
+.theme-select-container {
+    margin-left: auto;
 }

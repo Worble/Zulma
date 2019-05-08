@@ -1,5 +1,9 @@
-{% macro hero(title) %}
-<section class="hero is-primary is-bold">
+{% macro hero(title, primary) %}
+{% set class = "is-bold" %}
+{% if primary %}
+{% set class = class ~ " hero is-primary" %}
+{% endif %}
+<section class="{{class}}">
     <header>
         <div class="hero-body">
             <div class="container has-text-centered">
@@ -30,7 +34,8 @@
                 {% if paginator.previous %}
                 <a class="button is-primary pagination-previous" href="{{ paginator.previous }}">&laquo; Previous</a>
                 {% else %}
-                <a class="button is-primary pagination-previous" disabled title="This is the first page">&laquo; Previous</a>
+                <a class="button is-primary pagination-previous" disabled title="This is the first page">&laquo;
+                    Previous</a>
                 {% endif %}
                 <ul class="pagination-list">
                     <li>Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</li>

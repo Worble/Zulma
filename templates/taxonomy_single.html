@@ -11,7 +11,10 @@
 <!-- END NAV -->
 <main>
     <!-- START HERO TITLE -->
-    {{ index_macros::hero(title=title) }}
+    {% if not title %}
+    {% set title = taxonomy.name ~ ": " ~ term.name | capitalize %}
+    {% endif %}
+    {{ index_macros::hero(title=title,primary=false) }}
     <!-- END HERO TITLE -->
     <div class="container">
         <!-- START ARTICLE FEED -->

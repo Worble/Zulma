@@ -10,7 +10,10 @@
 <!-- END NAV -->
 <main>
     <!-- START HERO TITLE -->
-    {{ index_macros::hero(title=title) }}
+    {% if not title %}
+    {% set title = "All " ~ taxonomy.name | title %}
+    {% endif %}
+    {{ index_macros::hero(title=title,primary=false) }}
     <!-- END HERO TITLE -->
     <!-- START TAXONOMY LIST -->
     {{ taxonomy_macros::list(terms=terms) }}

@@ -1,5 +1,7 @@
 # Zulma
 
+A Bulma theme for Zola.
+
 ## Contents
 
 - [Zulma](#zulma)
@@ -44,7 +46,7 @@ All the source javascript files live in `javascript/src`. This is a list of the 
 - `zulma_switchcss.js` - Used for swapping themes (if enabled). Created by me.
 
 ### Building
- These are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/) installed.):
+ The javascript files are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and optionally [yarn](https://yarnpkg.com/lang/en/) installed.):
 
 ```
 cd javascript
@@ -83,7 +85,7 @@ authors = ["Joe Bloggs"]
 
 will cause that metadata to appear on the post, either on the header for the name, or at the bottom for tags and categories, and enable those pages.
 
-Making your own taxonomies is also designed to be as easy as possible, however it does seem to require adding files directly to the theme (someone please let me know if this isn't the case!). First, add it to your cargo.tml
+Making your own taxonomies is also designed to be as easy as possible. First, add it to your cargo.tml
 
 ```toml
 taxonomies = [
@@ -91,26 +93,25 @@ taxonomies = [
 ]
 ```
 
-and make the corrosponding folder in the theme templates, in this case: `themes\zulma\templates\links`, and the necessary files: `themes\zulma\templates\links\list.html` and `themes\zulma\templates\links\single.html`
+and make the corrosponding folder in your templates, in this case: `templates\links`, and the necessary files: `templates\links\list.html` and `templates\links\single.html`
 
-And then for each, just inherit the master page, render the block `content`, and set a variable called `title` for the hero to display on that page.
+And then for each, just inherit the zulma master page, render the block `content`. You may optionally set a variable called `title` for the hero to display on that page, otherwise it will use the default for that taxonomy.
 
-In `list.html`:
+In `single.html`:
 ```handlebars
-{% extends "taxonomy_list.html" %}
+{% extends "Zulma/templates/taxonomy_single.html" %}
 
 {% block content %}
-{% set title = "All Links"%}
 {{ super() }}
 {% endblock content %}
 ```
 
-In `single.html`:
+In `list.html`:
 ```handlebars
-{% extends "taxonomy_single.html" %}
+{% extends "Zulma/templates/taxonomy_list.html" %}
 
 {% block content %}
-{% set title = "Link: " ~ term.name %}
+{% set title = "These are all the Links"%}
 {{ super() }}
 {% endblock content %}
 ```
