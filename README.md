@@ -39,14 +39,14 @@ That's it! No more configuration should be required, however head to the [Option
 ## Javascript
 
 ### Sources
-All the source javascript files live in `javascript/src`. This is a list of the javascript files, their purpose, and their sources. All files are prefixed with `zulma_` to avoid any name clashes.
+All the source javascript files live in `javascript/src`. Following is a list of the javascript files, their purpose, and their sources. All files are prefixed with `zulma_` to avoid any name clashes.
 
 - `zulma_search.js` - Used when a user types into the search box on the navbar (if enabled). Taken from [Zola's site](https://github.com/getzola/zola/blob/6100a43/docs/static/search.js).
 - `zulma_navbar.js` - Used for the mobile navbar toggle. Taken from the [bulma template](https://github.com/dansup/bulma-templates/blob/6263eb7/js/bulma.js) at Bulmaswatch
-- `zulma_switchcss.js` - Used for swapping themes (if enabled). Created by me.
+- `zulma_switchcss.js` - Used for swapping themes (if enabled).
 
 ### Building
- The javascript files are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and optionally [yarn](https://yarnpkg.com/lang/en/) installed.):
+The javascript files are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and optionally [yarn](https://yarnpkg.com/lang/en/) installed.):
 
 ```
 cd javascript
@@ -85,7 +85,7 @@ authors = ["Joe Bloggs"]
 
 will cause that metadata to appear on the post, either on the header for the name, or at the bottom for tags and categories, and enable those pages.
 
-Making your own taxonomies is also designed to be as easy as possible. First, add it to your cargo.tml
+Making your own taxonomies is also designed to be as easy as possible. First, add it to your cargo.toml
 
 ```toml
 taxonomies = [
@@ -95,15 +95,11 @@ taxonomies = [
 
 and make the corrosponding folder in your templates, in this case: `templates\links`, and the necessary files: `templates\links\list.html` and `templates\links\single.html`
 
-And then for each, just inherit the zulma master page, render the block `content`. You may optionally set a variable called `title` for the hero to display on that page, otherwise it will use the default for that taxonomy.
+And then for each, just inherit the taxonomy master page for that page. Before rendering the content block, you may optionally set a variable called `title` for the hero to display on that page, otherwise it will use the default for that taxonomy.
 
 In `single.html`:
 ```handlebars
 {% extends "Zulma/templates/taxonomy_single.html" %}
-
-{% block content %}
-{{ super() }}
-{% endblock content %}
 ```
 
 In `list.html`:
