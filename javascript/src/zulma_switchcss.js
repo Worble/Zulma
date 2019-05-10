@@ -5,9 +5,47 @@
     const STYLESHEET_CLASSNAME = "stylesheet"
 
     //Variables
-    let link = null;
+    //let link = null;
     let previousLink = null;
     let theme = localStorage.getItem(THEME_KEY);
+
+    //Events
+    /* The function called when the css has finished loading */
+    const onLinkLoad = (event) => {
+        //remove event listeners
+        let link = event.currentTarget;
+        link.removeEventListener('load', onLinkLoad);
+        link.removeEventListener('error', onLinkError);
+        //remove the previous stylesheet(s)
+        removeStylesheets();
+        //add stylesheet class
+        link.className += STYLESHEET_CLASSNAME;
+        //everything is good, so we don't need this
+        previousLink = null;
+        //make body visible again if it was hidden
+        showBody();
+    }
+
+    const onLinkError = (event) => {
+        //remove event listeners
+        let link = event.currentTarget;
+        link.removeEventListener('load', onLinkLoad);
+        link.removeEventListener('error', onLinkError);
+        //remove theme from localstorage
+        clearTheme();
+        //remove theme from dropdown list
+        updateThemeSelect(link.id, false);
+        //remove link from page
+        link.remove();
+        //re-add the previous stylesheet (if any)
+        if (previousLink) {
+            document.getElementsByTagName("head")[0].appendChild(previousLink);
+        }
+        //set the theme select to the previous stylesheet
+        updateThemeSelect(document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`)[0].id, true)
+        //make body visible again if it was hidden
+        showBody();
+    }
 
     //Private Methods
     /* Called when the theme is changed */
@@ -20,7 +58,7 @@
         fileref.id = themeName;
 
         //append it to the head
-        link = document.getElementsByTagName("head")[0].appendChild(fileref);
+        let link = document.getElementsByTagName("head")[0].appendChild(fileref);
 
         //when it's loaded, call onLinkLoad
         link.addEventListener('load', onLinkLoad);
@@ -42,41 +80,6 @@
         document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`).forEach((el) => {
             el.remove();
         });
-    }
-
-    /* The function called when the css has finished loading */
-    function onLinkLoad() {
-        //remove event listeners
-        link.removeEventListener('load', onLinkLoad);
-        link.removeEventListener('error', onLinkError);
-        //remove the previous stylesheet(s)
-        removeStylesheets();
-        //add stylesheet class
-        link.className += STYLESHEET_CLASSNAME;
-        //everything is good, so we don't need this
-        previousLink = null;
-        //make body visible again if it was hidden
-        showBody();
-    }
-
-    function onLinkError() {
-        //remove event listeners
-        link.removeEventListener('load', onLinkLoad);
-        link.removeEventListener('error', onLinkError);
-        //remove theme from localstorage
-        clearTheme();
-        //remove theme from dropdown list
-        removeFromThemeSelect(link.id);
-        //remove link from page
-        link.remove();
-        //re-add the previous stylesheet (if any)
-        if (previousLink) {
-            document.getElementsByTagName("head")[0].appendChild(previousLink);
-        }
-        //set the theme select to the previous stylesheet
-        setThemeSelect(document.querySelectorAll(`.${STYLESHEET_CLASSNAME}`)[0].id)
-        //make body visible again if it was hidden
-        showBody();
     }
 
     /* Saves the current theme in localstorage */
@@ -113,39 +116,25 @@
             css.remove();
     }
 
-    /* Sets the theme selection to the given theme */
-    function setThemeSelect(theme) {
+    /* Either sets the theme selection to the given theme, or removes it from the list */
+    function updateThemeSelect(theme, setSelected) {
         //get all select options
         let elements = document.querySelectorAll('#theme-select>option');
         //if there are elements, the page is loaded and continue
         if (elements.length) {
             elements.forEach(element => {
                 if (element.value === theme) {
-                    element.selected = 'selected';
+                    if (setSelected) {
+                        element.selected = 'selected';
+                    } else {
+                        element.remove();
+                    }
                 }
             });
         } else {
             //if there are no elements, the page is not yet loaded; wait for loaded event and try again.
             window.addEventListener('DOMContentLoaded', () => {
-                setThemeSelect(theme)
-            });
-        }
-    }
-
-    function removeFromThemeSelect(theme) {
-        //get all select options
-        let elements = document.querySelectorAll('#theme-select>option');
-        //if there are elements, the page is loaded
-        if (elements.length) {
-            elements.forEach(element => {
-                if (element.value === theme) {
-                    element.remove();
-                }
-            });
-        } else {
-            //if there are no elements, the page is not yet loaded; wait for loaded event and try again.
-            window.addEventListener('DOMContentLoaded', () => {
-                removeFromThemeSelect(theme)
+                updateThemeSelect(theme, setSelected);
             });
         }
     }
@@ -159,7 +148,7 @@
             //change the theme
             changeTheme(theme, true);
             //when the DOM is loaded, change the select to their current choice
-            setThemeSelect(theme);
+            updateThemeSelect(theme, true);
         }
         //when the DOM is loaded, set the dropdown to trigger the theme change
         window.addEventListener('DOMContentLoaded', () => {
