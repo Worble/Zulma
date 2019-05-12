@@ -1,0 +1,13 @@
+[build]
+# assuming the Gutenberg site is in a docs folder, if it isn't you don't need
+# to have a `base` variable but you do need the `publish` and `command`
+publish = "public"
+command = "curl -sL https://github.com/getzola/zola/releases/download/v0.6.0/zola-v0.6.0-x86_64-unknown-linux-gnu.tar.gz | tar zxv && ./zola build --base-url $URL"
+
+# The magic for deploying previews of branches
+# We need to override the base url with whatever url Netlify assigns to our
+# preview site.  We do this using the Netlify environment variable
+# `$DEPLOY_PRIME_URL`.
+
+[context.deploy-preview]
+command = "curl -sL https://github.com/getzola/zola/releases/download/v0.6.0/zola-v0.6.0-x86_64-unknown-linux-gnu.tar.gz | tar zxv && ./zola build --base-url $DEPLOY_PRIME_URL"
