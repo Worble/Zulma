@@ -52,7 +52,7 @@ All the source javascript files live in `javascript/src`. Following is a list of
 
 ### Building
 
-The javascript files are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and optionally [yarn](https://yarnpkg.com/lang/en/) installed.):
+The javascript files are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and optionally [yarn](https://yarnpkg.com/lang/en/) installed):
 
 ```bash
 cd javascript
@@ -109,13 +109,13 @@ And then for each, just inherit the taxonomy master page for that page. Before r
 
 In `single.html`:
 
-```handlebars
+```jinja
 {% extends "Zulma/templates/taxonomy_single.html" %}
 ```
 
 In `list.html`:
 
-```handlebars
+```jinja
 {% extends "Zulma/templates/taxonomy_list.html" %}
 
 {% block content %}
