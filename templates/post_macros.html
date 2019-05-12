@@ -17,7 +17,7 @@
         <div class="tags has-addons level-item">
             <span class="tag is-rounded">{{ page.date | date(format="%F") }}</span>
             {% if page.taxonomies.authors %}
-            <span class="tag is-rounded is-info">
+            <span class="tag is-rounded is-primary">
                     {% for author in page.taxonomies.authors %}
                     {{ author }}
                     {% if page.taxonomies.authors | length > 1 %}
@@ -94,7 +94,7 @@
 by
 {% for author in page.taxonomies.authors %}
 <a href="{{ get_taxonomy_url(kind="authors", name=author) | safe }}">
-    <span class="tag is-success">{{ author }} </span>
+    <span class="tag is-primary">{{ author }} </span>
 </a>
 {% if page.taxonomies.authors | length > 1 %}
 {% if loop.index != page.taxonomies.authors | length %}
@@ -114,7 +114,7 @@ and
 {% if page.taxonomies.categories %}
 {% set category = page.taxonomies.categories[0] %}
 in <a href="{{ get_taxonomy_url(kind="categories", name=category) | safe }}">
-    <span class="tag is-primary">
+    <span class="tag is-success">
         {{ category }}
     </span>
 </a>
