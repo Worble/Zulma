@@ -5,3 +5,11 @@ min_version = "0.6.0"
 
 [extra]
 zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex", "lux", "slate", "solar", "superhero"]
+
+[author]
+name = "Worble"
+
+[original]
+author =  "dansup"
+homepage = "https://github.com/dansup"
+repo = "https://github.com/dansup/bulma-templates"

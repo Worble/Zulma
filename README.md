@@ -2,6 +2,8 @@
 
 A Bulma theme for Zola.
 
+![Zulma Screenshot](/screenshot.png)
+
 ## Contents
 
 - [Zulma](#zulma)
@@ -36,7 +38,7 @@ and then enable it in your `config.toml`:
 theme = "zulma"
 ```
 
-That's it! No more configuration should be required, however head to the [Options](#options) section to see what you can set for more customizability.
+That's it! No more configuration should be required, however it might look a little basic. Head to the [Options](#options) section to see what you can set for more customizability.
 
 ## Javascript
 
@@ -208,4 +210,4 @@ This template is based on the [blog template](https://dansup.github.io/bulma-tem
 
 ## Known Bugs
 
-- If user theme swapping is enabled and the user selects a theme different to the default, a slight delay will be introduced in page rendering as the css gets swapped out and in by the javascript. This is better than the alternative FOUC or flashes of the old theme, but still annoying. I don't know any way around this, but with browser caching it should be fast enough to not cause serious issues.
+- If user theme swapping is enabled and the user selects a theme different to the default, a slight delay will be introduced in page rendering as the css gets swapped out and in by the javascript. This is particularly pronounced when using the dark theme, since it will flash white before going back to black. This is better than the alternative flashes of unstyled content or old theme, but still annoying. I don't know any way around this, but with browser caching it should be fast enough to not cause serious issues.
