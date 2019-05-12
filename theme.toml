@@ -4,4 +4,4 @@ license = "MIT"
 min_version = "0.6.0"
 
 [extra]
-zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex"]
+zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex", "lux", "slate", "solar", "superhero"]

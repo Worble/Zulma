@@ -22,12 +22,14 @@ A Bulma theme for Zola.
   - [Known Bugs](#known-bugs)
 
 ## Installation
+
 First download this theme to your `themes` directory:
 
 ```bash
-$ cd themes
-$ git clone https://github.com/Worble/Zulma
+cd themes
+git clone https://github.com/Worble/Zulma
 ```
+
 and then enable it in your `config.toml`:
 
 ```toml
@@ -39,6 +41,7 @@ That's it! No more configuration should be required, however head to the [Option
 ## Javascript
 
 ### Sources
+
 All the source javascript files live in `javascript/src`. Following is a list of the javascript files, their purpose, and their sources. All files are prefixed with `zulma_` to avoid any name clashes.
 
 - `zulma_search.js` - Used when a user types into the search box on the navbar (if enabled). Taken from [Zola's site](https://github.com/getzola/zola/blob/6100a43/docs/static/search.js).
@@ -46,9 +49,10 @@ All the source javascript files live in `javascript/src`. Following is a list of
 - `zulma_switchcss.js` - Used for swapping themes (if enabled).
 
 ### Building
+
 The javascript files are transpiled by babel, minified by webpack, sourcemaps are generated and then everything placed in `static/js`. The repo already contains the transpiled and minified files along with their corrosponding sourcemaps so you don't need to do anything to use these. If you would prefer to build it yourself, feel free to inspect the js files and then run the build process yourself (please ensure that you have [node, npm](https://nodejs.org/en/) and optionally [yarn](https://yarnpkg.com/lang/en/) installed.):
 
-```
+```bash
 cd javascript
 yarn
 yarn webpack
@@ -57,13 +61,17 @@ yarn webpack
 ## Options
 
 ### Pagination
+
 Zulma makes no assumptions about your project. You can freely paginate your content folder or your taxonomies and it will adapt accordingly. For example, editing or creating section (`content/_index.md`) and setting pagination:
+
 ```toml
 paginate_by = 5
 ```
+
 This is handled internally, no input is needed from the user.
 
 ### Taxonomies
+
 Zulma has 3 taxonomies already set internally: `tags`, `cateogories` and `authors`. Setting of any these three in your config.toml like so:
 
 ```toml
@@ -98,11 +106,13 @@ and make the corrosponding folder in your templates, in this case: `templates\li
 And then for each, just inherit the taxonomy master page for that page. Before rendering the content block, you may optionally set a variable called `title` for the hero to display on that page, otherwise it will use the default for that taxonomy.
 
 In `single.html`:
+
 ```handlebars
 {% extends "Zulma/templates/taxonomy_single.html" %}
 ```
 
 In `list.html`:
+
 ```handlebars
 {% extends "Zulma/templates/taxonomy_list.html" %}
 
@@ -113,7 +123,8 @@ In `list.html`:
 ```
 
 ### Menu Links
-In extra, setting `zulma_menu` with a list of items will cause them to render to the top menu bar. It has two paramers, `url` and `name`. These *must* be set. If you put $BASE_URL in a url, it will automatically be replaced by the actual site URL. This is the easiest way to allow users to navigate to your taxonomies:
+
+In extra, setting `zulma_menu` with a list of items will cause them to render to the top menu bar. It has two paramers, `url` and `name`. These _must_ be set. If you put \$BASE_URL in a url, it will automatically be replaced by the actual site URL. This is the easiest way to allow users to navigate to your taxonomies:
 
 ```toml
 [extra]
@@ -127,7 +138,8 @@ zulma_menu = [
 On mobile, a dropdown burger is rendered using javascript. If the page detects javascript is disabled on the clients machine, it will gracefully degrade to always showing the menu (which isn't pretty, but keeps the site functional).
 
 ### Brand
-In extra, setting `zulma_brand` will cause a brand image to display in the upper left of the top menu bar. This link will always lead back to the homepage. It has two parameters, `image`(optional) and `text`(required). `image` will set the brand to an image at the location specified, and `text` will provide the alt text for this image. If you put $BASE_URL in a url, it will automatically be replaced by the actual site URL. If `image` is not set, the brand will simply be the text specified.
+
+In extra, setting `zulma_brand` will cause a brand image to display in the upper left of the top menu bar. This link will always lead back to the homepage. It has two parameters, `image`(optional) and `text`(required). `image` will set the brand to an image at the location specified, and `text` will provide the alt text for this image. If you put \$BASE_URL in a url, it will automatically be replaced by the actual site URL. If `image` is not set, the brand will simply be the text specified.
 
 ```toml
 [extra]
@@ -135,11 +147,13 @@ zulma_brand = {image = "$BASE_URL/images/bulma.png", text = "Home"}
 ```
 
 ### Search
+
 Zulma provides search built in. So long as `build_search_index` is set to `true` in `config.toml` then a search input will appear on the top navigation bar. This requires javascript to be enabled to function; if the page detects javascript is disabled on the clients machine, it will hide itself.
 
 The search is shamefully stolen from [Zola's site](https://github.com/getzola/zola/blob/master/docs/static/search.js). Thanks, Vincent!
 
 ### Title
+
 In extra, setting `zulma_title` will set a hero banner on the index page to appear with that title inside.
 
 ```toml
@@ -148,19 +162,22 @@ zulma_title = "Blog"
 ```
 
 If you want to get fancy with it, you can set an image behind using sass like so:
+
 ```scss
 .index .hero-body {
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Plum_trees_Kitano_Tenmangu.jpg/1200px-Plum_trees_Kitano_Tenmangu.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.6);
-    background-blend-mode: overlay;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Plum_trees_Kitano_Tenmangu.jpg/1200px-Plum_trees_Kitano_Tenmangu.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-blend-mode: overlay;
 }
 ```
+
 This will set the image behind the hero, and darken it so the main text can still be easily read.
 
 ### Theming
+
 In extra, setting `zulma_theme` to a valid value will change the current colour scheme to that one. All themes were taken from [Bulmaswatch](https://jenil.github.io/bulmaswatch/). Valid theme values are:
 
 - default
@@ -186,7 +203,9 @@ zulma_allow_theme_selection = true
 ```
 
 ## Original
+
 This template is based on the [blog template](https://dansup.github.io/bulma-templates/templates/blog.html) over at [Free Bulma Templates](https://dansup.github.io/bulma-templates/). All themes were taken from [Bulmaswatch](https://jenil.github.io/bulmaswatch/). The code behind from originally adapted from the [after-dark](https://github.com/getzola/after-dark/blob/master/README.md) zola template.
 
 ## Known Bugs
+
 - If user theme swapping is enabled and the user selects a theme different to the default, a slight delay will be introduced in page rendering as the css gets swapped out and in by the javascript. This is better than the alternative FOUC or flashes of the old theme, but still annoying. I don't know any way around this, but with browser caching it should be fast enough to not cause serious issues.

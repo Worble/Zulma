@@ -3,3 +3,24 @@ base_url = "https://example.com"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
+
+taxonomies = [
+    {name = "categories"},
+    {name = "tags", paginate_by = 5, rss = true},
+    {name = "authors", rss = true},
+]
+
+build_search_index = true
+
+[extra]
+zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex", "lux", "slate", "solar", "superhero"]
+
+zulma_menu = [
+    {url = "$BASE_URL/categories", name = "Categories"},
+    {url = "$BASE_URL/tags", name = "Tags"},
+    {url = "$BASE_URL/authors", name = "Authors"}
+]
+zulma_brand = {text = "Home"}
+zulma_title = "My Blog"
+zulma_theme = "darkly"
+zulma_allow_theme_selection = true

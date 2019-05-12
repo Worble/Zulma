@@ -15,10 +15,23 @@
             </p>
         </a>
         <div class="tags has-addons level-item">
-            {% if page.extra.author %}
-            <span class="tag is-rounded is-info">{{ page.extra.author }}</span>
-            {% endif %}
             <span class="tag is-rounded">{{ page.date | date(format="%F") }}</span>
+            {% if page.taxonomies.authors %}
+            <span class="tag is-rounded is-info">
+                    {% for author in page.taxonomies.authors %}
+                    {{ author }}
+                    {% if page.taxonomies.authors | length > 1 %}
+                    {% if loop.index != page.taxonomies.authors | length %}
+                    {% if loop.index == page.taxonomies.authors | length - 1 %}
+                    and
+                    {% else %}
+                    ,
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+            </span>
+            {% endif %}           
             <span class="tag is-rounded">{{ self::read_time(page=page) }}</span>
         </div>
     </div>
