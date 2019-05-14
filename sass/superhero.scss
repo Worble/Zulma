@@ -3,3 +3,12 @@
 @import "./_vendor/superhero/overrides";
 
 @import "./blog";
+
+.box {
+    $card-border-color: lighten($grey-darker, 5);
+    $border-width: 2px default;
+    box-shadow: none;
+    border: $border-width solid $card-border-color;
+    background-color: $grey-darker;
+    border-radius: $radius;
+}

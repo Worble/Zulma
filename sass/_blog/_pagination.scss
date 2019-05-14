@@ -1,0 +1,8 @@
+.paginator-container {
+    padding: 2rem 0;
+
+    .pagination-previous,
+    .pagination-next {
+        flex-grow: 0;
+    }
+}

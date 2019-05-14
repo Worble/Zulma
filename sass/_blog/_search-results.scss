@@ -1,0 +1,26 @@
+.search-results {
+    display: none;
+    max-height: 35rem;
+    overflow: auto;
+
+    @include desktop {
+        position: absolute;
+        top: 100%;
+        width: 50rem;
+        right: 0;
+        margin-right: 0.75rem;
+    }
+
+    .search-results__items>li {
+        list-style: none;
+        margin-top: 1rem;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+input#search::placeholder {
+    color: $grey-darker;
+}
