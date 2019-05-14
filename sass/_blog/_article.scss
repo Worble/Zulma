@@ -1,0 +1,39 @@
+.article {
+    margin-top: 1rem;
+
+
+    .article-title {
+        font-size: 2rem;
+        font-weight: lighter;
+        line-height: 2;
+        margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+        margin-bottom: 3rem;
+    }
+
+    .article-footer,
+    .article-body {
+        margin: 2rem 0;
+
+        @include desktop {
+            margin: 2rem 6rem;
+        }
+    }
+
+    .article-body {
+        line-height: 1.4;
+    }
+
+    .article-footer {
+        font-style: italic;
+        padding: 1.5rem;
+        width: 100%;
+
+        .button,
+        .tag {
+            font-style: normal;
+        }
+    }
+}

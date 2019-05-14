@@ -1,6 +1,6 @@
 # Zulma
 
-A Bulma theme for Zola.
+A Bulma theme for Zola. See a live preview [here](https://festive-morse-47d46c.netlify.com/)
 
 ![Zulma Screenshot](/screenshot.png)
 
@@ -187,6 +187,10 @@ In extra, setting `zulma_theme` to a valid value will change the current colour 
 - flatly
 - pulse
 - simplex
+- lux
+- slate
+- solar
+- superhero
 
 All valid themes can also be found under the `extra.zulma_themes` variable in the `theme.toml`. Choosing no theme will set default as the theme. Setting an invalid theme value will cause the site to render improperly.
 

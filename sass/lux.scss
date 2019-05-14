@@ -3,3 +3,12 @@
 @import "./_vendor/lux/overrides";
 
 @import "./blog";
+
+.box {
+    $card-border-color: $grey-darker;
+    $border-width: 2px default;
+    box-shadow: none;
+    border: $border-width solid $card-border-color;
+    background-color: $grey-darker;
+    border-radius: $radius;
+}
