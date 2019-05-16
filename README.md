@@ -201,12 +201,34 @@ zulma_theme = "darkly"
 
 Additionally, in extra, you can also set the `zulma_allow_theme_selection` boolean. Setting this to `true` will allow a menu in the footer to allow users to select their own theme. This option will store their theme choice in their localstorage and apply it on every page, assuming `zulma_allow_theme_selection` is still true. This requires javascript to be enabled to function; if the page detects javascript is disabled on the clients machine, it will hide itself.
 
-Each theme contains the entirety of Bulma, and will weigh in at ~180kb. If you're running on a server severely limited on space, then I'd recommend you delete each theme you're not using, either from the source or from `/public`. Obviously, doing this will cause `zulma_allow_theme_selection` to work improperly, so make sure you either override `extra.zulma_themes` in `config.toml` to only show themes you have left or to not enable this option at all.
+Each theme contains the entirety of Bulma, and will weigh in at ~180kb. If you're running on a server severely limited on space, there are a couple of things you can do: 
 
-```toml
-[extra]
-zulma_allow_theme_selection = true
-```
+  1. The first way to save space is to delete each theme you're not using, either from the source or from `/public`. Obviously, doing this will cause `zulma_allow_theme_selection` to work improperly, so make sure you either override `extra.zulma_themes` in `config.toml` to only show themes you have left or to not enable this option at all.
+      ```toml
+      [extra]
+      # after overriding here, you can safely delete the other css files
+      zulma_themes = ["default", "darkly", "flatly"]
+      ```
+
+  2. The other way to save space is to run purgecss on the css, which will remove all the unused styles. Prerequisites:
+   
+     - This requires npx to be installed on your computer (if you have [npm and node](https://nodejs.org/en/), this should already be the case and you don't have to do anything). 
+     - This requires python3 to be installed on your computer, along with the [toml library](https://pypi.org/project/toml/) using `pip install toml`
+     - You should ensure that you have overridden `extra.zulma_themes` on your `config.toml`, even if you don't change any of them, so the script file knows which css files to look for.
+  
+        ```toml
+        [extra]
+        #overridden themes - this is copy and pasted from the theme.toml; if you've deleted any of the css files to save space, make sure you remove them here too!
+        zulma_themes = ["default", "darkly", "flatly", "pulse", "simplex", "lux", "slate", "solar", "superhero"]
+        ```
+
+      You can then run the script by:
+        1. Copy the `purgecss.py` from the root of the theme to your project root
+        2. As always, inspect the script file before running it to ensure it is not malicious
+        3. Run `zola build` on your project root
+        4. Run the script with `python ./purgecss.py` 
+
+      Afterwards, your css files in `./public` should be dramatically smaller (from ~180kb to ~20kb!).
 
 ## Original
 
