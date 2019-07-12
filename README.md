@@ -210,7 +210,7 @@ zulma_allow_theme_selection = true
 
 ## Original
 
-This template is based on the [blog template](https://dansup.github.io/bulma-templates/templates/blog.html) over at [Free Bulma Templates](https://dansup.github.io/bulma-templates/). All themes were taken from [Bulmaswatch](https://jenil.github.io/bulmaswatch/). The code behind from originally adapted from the [after-dark](https://github.com/getzola/after-dark/blob/master/README.md) zola template.
+This template is based on the [blog template](https://bulmatemplates.github.io/bulma-templates/templates/blog.html) over at [Free Bulma Templates](https://bulmatemplates.github.io/bulma-templates/). All themes were taken from [Bulmaswatch](https://jenil.github.io/bulmaswatch/). The code behind from originally adapted from the [after-dark](https://github.com/getzola/after-dark/blob/master/README.md) zola template.
 
 ## Known Bugs
 
