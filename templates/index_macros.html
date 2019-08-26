@@ -77,8 +77,10 @@
                 <div class="navbar-end">
                     {% if config.extra.zulma_menu %}
                     {% for item in config.extra.zulma_menu %}
+                    {% set item_url =  item.url | replace(from="$BASE_URL", to=config.base_url) %}
+                    {% set item_url = item_url ~ "/" %}
                     <a itemprop="url"
-                        class="navbar-item {% if item.url | replace(from="$BASE_URL", to=config.base_url) == current_url %}is-active{% endif %}"
+                        class="navbar-item {% if item_url == current_url %}is-active{% endif %}"
                         href="{{ item.url | safe | replace(from="$BASE_URL", to=config.base_url) }}">
                         <span itemprop="name">{{ item.name }}
                         </span>
