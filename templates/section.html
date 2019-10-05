@@ -13,17 +13,18 @@
     <section class="container">
         <div class="columns is-desktop">
             <div class="column is-10-desktop is-offset-1-desktop">
+                <!-- START ARTICLE FEED !-->
                 {% if paginator %}
-            {{ index_macros::list_articles(pages=paginator.pages) }}
-            {% else %}
-            {{ index_macros::list_articles(pages=section.pages) }}
-            {% endif %}
-            <!-- END ARTICLE FEED -->
-            <!-- START PAGINATION -->
-            {% if paginator %}
-            {{ index_macros::paginate(paginator=paginator) }}
-            {% endif %}
-            <!-- END PAGINATION -->
+                {{ index_macros::list_articles(pages=paginator.pages) }}
+                {% else %}
+                {{ index_macros::list_articles(pages=section.pages) }}
+                {% endif %}
+                <!-- END ARTICLE FEED -->
+                <!-- START PAGINATION -->
+                {% if paginator %}
+                {{ index_macros::paginate(paginator=paginator) }}
+                {% endif %}
+                <!-- END PAGINATION -->
             </div>
         </div>
     </section>
