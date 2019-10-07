@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% import "post_macros.html" as post_macros %}
+{% import "index_macros.html" as index_macros %}
+
+{% block content %}
+<!-- START NAV -->
+{% block header %}
+{{ super() }}
+{% endblock header %}
+<!-- END NAV -->
+<main>
+    <!-- START HERO TITLE -->
+    {% if section.extra.zulma_title %}
+        {{ index_macros::hero(title=section.extra.zulma_title, primary=true) }}
+    {% endif %}
+    <!-- END HERO TITLE !-->
+    <section class="container">
+        <div class="columns is-desktop">
+            <div class="column is-10-desktop is-offset-1-desktop">
+                <!-- START ARTICLE FEED !-->
+                {% if paginator %}
+                {{ index_macros::list_articles(pages=paginator.pages) }}
+                {% else %}
+                {{ index_macros::list_articles(pages=section.pages) }}
+                {% endif %}
+                <!-- END ARTICLE FEED -->
+                <!-- START PAGINATION -->
+                {% if paginator %}
+                {{ index_macros::paginate(paginator=paginator) }}
+                {% endif %}
+                <!-- END PAGINATION -->
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}
