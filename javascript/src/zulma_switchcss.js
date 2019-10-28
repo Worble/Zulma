@@ -1,12 +1,12 @@
 (function(switch_css) {
   //Constants
   const THEME_KEY = "ZULMA_THEME";
+  const THEME = localStorage.getItem(THEME_KEY);
   const STOP_BLINK_CSS_ID = "stop-blink";
   const STYLESHEET_CLASSNAME = "stylesheet";
 
   //Variables
   let previousLink = null;
-  let theme = localStorage.getItem(THEME_KEY);
 
   //Events
   /* The function called when the css has finished loading */
@@ -143,13 +143,13 @@
   //Public Methods
   switch_css.init = function() {
     //if user has selected and theme and it is not the current theme
-    if (theme && !document.getElementById(theme)) {
+    if (THEME && !document.getElementById(THEME)) {
       //hide the body to stop FOUC
       hideBody();
       //change the theme
-      changeTheme(theme, true);
+      changeTheme(THEME, true);
       //when the DOM is loaded, change the select to their current choice
-      updateThemeSelect(theme, true);
+      updateThemeSelect(THEME, true);
     }
     //when the DOM is loaded, set the dropdown to trigger the theme change
     window.addEventListener("DOMContentLoaded", () => {
