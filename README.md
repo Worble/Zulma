@@ -35,7 +35,7 @@ git clone https://github.com/Worble/Zulma
 and then enable it in your `config.toml`:
 
 ```toml
-theme = "zulma"
+theme = "Zulma"
 ```
 
 That's it! No more configuration should be required, however it might look a little basic. Head to the [Options](#options) section to see what you can set for more customizability.
