@@ -57,7 +57,7 @@
     var fileref = document.createElement("link");
     fileref.rel = "stylesheet";
     fileref.type = "text/css";
-    fileref.href = `${baseUrl}/${themeName}.css`;
+    fileref.href = `${baseUrl}${baseUrl.slice(-1) !== "/" ? "/" : ""}${themeName}.css`;
     fileref.id = themeName;
 
     //append it to the head
