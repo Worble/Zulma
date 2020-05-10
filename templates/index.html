@@ -20,6 +20,9 @@
     <!-- This script must follow css -->
     {% if config.extra.zulma_allow_theme_selection %}
     <script type="text/javascript" src="{{ get_url(path="js/zulma_switchcss.js") }}"></script>
+    <script>
+        switch_css.init("{{config.base_url | safe}}");
+    </script>
     {% endif %}
 
     {% if config.generate_rss %}
