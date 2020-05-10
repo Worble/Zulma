@@ -1,4 +1,4 @@
-(function(switch_css) {
+(function (switch_css) {
   //Constants
   const THEME_KEY = "ZULMA_THEME";
   const THEME = localStorage.getItem(THEME_KEY);
@@ -7,6 +7,7 @@
 
   //Variables
   let previousLink = null;
+  let baseUrl = "";
 
   //Events
   /* The function called when the css has finished loading */
@@ -56,7 +57,7 @@
     var fileref = document.createElement("link");
     fileref.rel = "stylesheet";
     fileref.type = "text/css";
-    fileref.href = `/${themeName}.css`;
+    fileref.href = `${baseUrl}/${themeName}.css`;
     fileref.id = themeName;
 
     //append it to the head
@@ -141,7 +142,8 @@
   }
 
   //Public Methods
-  switch_css.init = function() {
+  switch_css.init = function (url) {
+    baseUrl = url
     //if user has selected and theme and it is not the current theme
     if (THEME && !document.getElementById(THEME)) {
       //hide the body to stop FOUC
@@ -153,11 +155,9 @@
     }
     //when the DOM is loaded, set the dropdown to trigger the theme change
     window.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("theme-select").onchange = function() {
+      document.getElementById("theme-select").onchange = function () {
         changeTheme(this.value);
       };
     });
   };
 })((switch_css = window.switch_css || {})); // eslint-disable-line
-
-switch_css.init(); // eslint-disable-line
