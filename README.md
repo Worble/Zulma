@@ -145,11 +145,11 @@ On mobile, a dropdown burger is rendered using javascript. If the page detects j
 
 ### Brand
 
-In extra, setting `zulma_brand` will cause a brand image to display in the upper left of the top menu bar. This link will always lead back to the homepage. It has two parameters, `image`(optional) and `text`(required). `image` will set the brand to an image at the location specified, and `text` will provide the alt text for this image. If you put \$BASE_URL in a url, it will automatically be replaced by the actual site URL. If `image` is not set, the brand will simply be the text specified.
+In extra, setting `zulma_brand` will cause a brand image to display in the upper left of the top menu bar. By default, this link will lead back to the homepage (root "/" of the website). It has three parameters, `image`(optional), `url` (optional), and `text`(required). `image` will set the brand to an image at the location specified, and `text` will provide the alt text for this image. `url` will override the link to the specified URL rather than the root of the website. If you put \$BASE_URL in a url, it will automatically be replaced by the actual site URL. If `image` is not set, the brand will simply be the text specified.
 
 ```toml
 [extra]
-zulma_brand = {image = "$BASE_URL/images/bulma.png", text = "Home"}
+zulma_brand = {image = "$BASE_URL/images/bulma.png", url = "$BASE_URL", text = "Home"}
 ```
 
 ### Search
