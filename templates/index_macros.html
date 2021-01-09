@@ -58,7 +58,12 @@
         <div class="container">
             <div class="navbar-brand">
                 {% if config.extra.zulma_brand %}
-                <a class="navbar-item" href="/">
+                {% if config.extra.zulma_brand.url %}
+                {% set brand_url = config.extra.zulma_brand.url | safe | replace(from="$BASE_URL", to=config.base_url) %}
+                {% else %}
+                {% set brand_url = "/" %}
+                {% endif %}
+                <a class="navbar-item" href="{{ brand_url }}">
                     {% if config.extra.zulma_brand.image %}
                     <img src="{{ config.extra.zulma_brand.image | safe | replace(from="$BASE_URL", to=config.base_url) }}"
                         alt="{{ config.extra.zulma_brand.text }}">
