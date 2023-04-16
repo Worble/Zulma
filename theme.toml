@@ -2,7 +2,7 @@ name = "Zulma"
 description = "A zola theme based off bulma.css"
 license = "MIT"
 min_version = "0.6.0"
-demo = "https://festive-morse-47d46c.netlify.com/"
+demo = "https://festive-morse-47d46c.netlify.app/"
 homepage = "https://github.com/Worble/Zulma"
 
 [extra]
